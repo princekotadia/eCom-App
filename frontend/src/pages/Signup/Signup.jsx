@@ -17,11 +17,43 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    const trimmedName = fullName.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    const cleanPhone = phone.trim();
+
+    if (!trimmedName) {
+      setError('Please enter your full name.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      setError('Phone number must contain exactly 10 digits.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      await axiosInstn.post("/customers/register", { fullName, email, password, phone });
-      navigate('/login')
+      await axiosInstn.post("/customers/register", {
+        fullName: trimmedName,
+        email: trimmedEmail,
+        password,
+        phone: cleanPhone
+      });
+      navigate('/login');
     } catch (error) {
       console.error("Error occurred while signing up:", error);
       setError(error.response?.data?.message || 'Something went wrong. Please try again.');
@@ -148,11 +180,13 @@ const Signup = () => {
               </svg>
             </span>
             <input
-              type="text"
-              placeholder="Phone Number"
+              type="tel"
+              inputMode="numeric"
+              placeholder="10-Digit Phone Number"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
               autoComplete="tel"
+              maxLength={10}
               required
             />
           </div>

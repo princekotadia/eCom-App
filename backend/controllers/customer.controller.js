@@ -5,41 +5,64 @@ import jwt from "jsonwebtoken"
 async function register(req, res) {
     const { fullName, email, password, phone } = req.body
 
-    if (!fullName || !email || !password || !phone) {
+    const cleanName = fullName?.trim()
+    const cleanEmail = email?.trim()?.toLowerCase()
+    const cleanPhone = phone?.toString()?.trim()
+
+    if (!cleanName || !cleanEmail || !password || !cleanPhone) {
         return res.status(400).json({
-            "message": "Please provide all required fields"
+            success: false,
+            message: "Please provide all required fields"
         })
     }
 
-    const existingUser = await userModel.findOne({ email: email })
-    if (existingUser) {
-        return res.status(409).json({
-            "message": "Email already exists"
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(cleanEmail)) {
+        return res.status(400).json({
+            success: false,
+            message: "Please enter a valid email address"
+        })
+    }
+
+    const phoneRegex = /^[0-9]{10}$/
+    if (!phoneRegex.test(cleanPhone)) {
+        return res.status(400).json({
+            success: false,
+            message: "Phone number must be a valid 10-digit number"
         })
     }
 
     if (password.length < 6) {
         return res.status(400).json({
-            "message": "Password must be at least 6 characters long"
+            success: false,
+            message: "Password must be at least 6 characters long"
+        })
+    }
+
+    const existingUser = await userModel.findOne({ email: cleanEmail })
+    if (existingUser) {
+        return res.status(409).json({
+            success: false,
+            message: "Email already exists"
         })
     }
 
     const user = await userModel.create({
-        fullName: fullName,
-        email: email,
+        fullName: cleanName,
+        email: cleanEmail,
         password: await bcrypt.hash(password, 10),
-        phone: phone
+        phone: cleanPhone
     })
 
     res.status(201).json({
-        "success": true,
-        "message": "Customer registered successfully",
-        "customer": {
-            "_id": user._id,
-            "fullName": user.fullName,
-            "email": user.email,
-            "phone": user.phone,
-            "createdAt": user.createdAt
+        success: true,
+        message: "Customer registered successfully",
+        customer: {
+            _id: user._id,
+            fullName: user.fullName,
+            email: user.email,
+            phone: user.phone,
+            createdAt: user.createdAt
         }
     })
 }
@@ -47,13 +70,16 @@ async function register(req, res) {
 async function login(req, res) {
     const { email, password } = req.body
 
-    if (!email || !password) {
+    const cleanEmail = email?.trim()?.toLowerCase()
+
+    if (!cleanEmail || !password) {
         return res.status(400).json({
-            "message": "Please provide all required fields"
+            success: false,
+            message: "Please provide all required fields"
         })
     }
 
-    const existingUser = await userModel.findOne({ email: email })
+    const existingUser = await userModel.findOne({ email: cleanEmail })
     if (!existingUser) {
         return res.status(401).json({
             "message": "Invalid email or password"

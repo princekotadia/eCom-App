@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstn from '../../axiosCalls/axios';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import './Product.css';
 
 const ProductCard = ({ prod, navigate, initialWishlisted }) => {
   const [isWishlisted, setIsWishlisted] = useState(initialWishlisted || false);
   const [wishlistStatus, setWishlistStatus] = useState('default'); // 'default', 'loading', 'error'
   const [errorMessage, setErrorMessage] = useState('');
-  
+
+  const { user } = useAuth();
   const { cartItems, addToCart } = useCart();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
@@ -20,6 +22,10 @@ const ProductCard = ({ prod, navigate, initialWishlisted }) => {
   });
 
   const handleToggleWishlist = async () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     setWishlistStatus('loading');
     setErrorMessage('');
     try {
@@ -33,6 +39,10 @@ const ProductCard = ({ prod, navigate, initialWishlisted }) => {
   };
 
   const handleAddToCart = async () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     setIsAddingToCart(true);
     setErrorMessage('');
     try {
@@ -103,8 +113,8 @@ const ProductCard = ({ prod, navigate, initialWishlisted }) => {
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
-          
-          <button 
+
+          <button
             className="add-to-cart-inline-btn"
             onClick={handleAddToCart}
             disabled={isAddingToCart || prod.stock <= 0}
