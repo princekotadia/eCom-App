@@ -1,0 +1,132 @@
+/* ── NavBar — Premium Floating Design ─────────────────────── */
+
+.navbar-wrapper {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  /* Let clicks pass through empty space */
+}
+
+.navbar {
+  pointer-events: auto;
+  /* Re-enable clicks on the actual navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 100px;
+  /* Floating pill shape */
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar h1::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background-color: #1a1a2e;
+  mask: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2040%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2210%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M13%2027V15l7%205-7%207zm7-7l7-5v14l-7-7z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E") no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2040%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2210%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M13%2027V15l7%205-7%207zm7-7l7-5v14l-7-7z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E") no-repeat center / contain;
+  border-radius: 8px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link:hover {
+  color: #1a1a2e;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2.5px;
+  background-color: #1a1a2e;
+  transition: width 0.2s ease;
+  border-radius: 4px;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(26, 26, 46, 0.15);
+}
+
+.logout-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(26, 26, 46, 0.25);
+}
+
+.logout-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(26, 26, 46, 0.15);
+}
+
+@media (max-width: 768px) {
+  .navbar-wrapper {
+    padding: 0 12px;
+  }
+
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-link {
+    font-size: 13.5px;
+  }
+}

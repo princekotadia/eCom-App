@@ -1,0 +1,284 @@
+/* ── Login Page — Sky / Glass Card Design ──────────────────── */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Decorative arcs ──────────────────────────────────────── */
+
+.login-arc {
+  position: absolute;
+  border: 1px solid rgba(180, 210, 235, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.login-arc-1 {
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-arc-2 {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Top-left brand ───────────────────────────────────────── */
+
+.login-top-brand {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a2e;
+  z-index: 10;
+  letter-spacing: -0.3px;
+}
+
+/* ── Center card ──────────────────────────────────────────── */
+
+.login-card {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 420px;
+  padding: 44px 40px 36px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+/* ── Icon box ─────────────────────────────────────────────── */
+
+.login-icon-box {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Heading ──────────────────────────────────────────────── */
+
+.login-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.login-subtitle {
+  font-size: 13.5px;
+  color: #8b8b9e;
+  line-height: 1.55;
+  margin: 0 0 28px 0;
+}
+
+/* ── Error ────────────────────────────────────────────────── */
+
+.login-error {
+  padding: 10px 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  color: #b91c1c;
+  font-size: 13px;
+  margin-bottom: 18px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Input wrapper ────────────────────────────────────────── */
+
+.login-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(245, 245, 248, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-input-wrapper:focus-within {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+}
+
+.login-input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 14px;
+  flex-shrink: 0;
+}
+
+.login-input-wrapper input {
+  flex: 1;
+  padding: 13px 14px 13px 10px;
+  font-size: 14.5px;
+  color: #1a1a2e;
+  background: transparent;
+  border: none;
+  outline: none;
+  line-height: 1.5;
+}
+
+.login-input-wrapper input::placeholder {
+  color: #a0a0b2;
+}
+
+/* ── Eye toggle ───────────────────────────────────────────── */
+
+.login-eye-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: opacity 0.15s;
+  opacity: 0.6;
+}
+
+.login-eye-btn:hover {
+  opacity: 1;
+}
+
+/* ── Submit button ────────────────────────────────────────── */
+
+.login-submit-btn {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  letter-spacing: 0.2px;
+  margin-top: 6px;
+}
+
+.login-submit-btn:hover:not(:disabled) {
+  background: #2d2d44;
+}
+
+.login-submit-btn:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.login-submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ── Loading spinner ──────────────────────────────────────── */
+
+.login-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: login-spin 0.6s linear infinite;
+}
+
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Register link ────────────────────────────────────────── */
+
+.login-register-link {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #8b8b9e;
+}
+
+.login-register-link a {
+  color: #1a1a2e;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.login-register-link a:hover {
+  opacity: 0.7;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .login-card {
+    margin: 0 16px;
+    padding: 36px 24px 28px;
+  }
+
+  .login-top-brand {
+    top: 16px;
+    left: 20px;
+  }
+
+  .login-arc-1 {
+    width: 500px;
+    height: 500px;
+  }
+
+  .login-arc-2 {
+    width: 350px;
+    height: 350px;
+  }
+}

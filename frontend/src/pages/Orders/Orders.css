@@ -1,0 +1,284 @@
+/* ── Orders Page ───────────────────────────────────────────── */
+
+.orders-page-container {
+  margin: 0;
+  padding: 40px 20px 80px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+.orders-content-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.orders-page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 32px 0;
+  letter-spacing: -0.5px;
+}
+
+/* ── Loading State ────────────────────────────────────────── */
+
+.orders-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.loading-text {
+  margin-top: 16px;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+/* ── Error State ──────────────────────────────────────────── */
+
+.orders-error-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  border: 1px solid #fee2e2;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.orders-error-card .error-icon {
+  width: 52px;
+  height: 52px;
+  background-color: #fef2f2;
+  color: #ef4444;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.orders-error-card h3 {
+  font-size: 18px;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+}
+
+.orders-error-card p {
+  font-size: 14.5px;
+  color: #6b7280;
+  margin: 0 0 20px 0;
+}
+
+.retry-btn {
+  padding: 10px 24px;
+  background-color: #1a1a2e;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retry-btn:hover {
+  background-color: #2d2d44;
+}
+
+/* ── Empty State ──────────────────────────────────────────── */
+
+.orders-empty-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 60px 32px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.empty-package-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.orders-empty-card h2 {
+  font-size: 20px;
+  color: #1a1a2e;
+  margin: 0 0 10px 0;
+}
+
+.orders-empty-card p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0 0 28px 0;
+}
+
+.start-shopping-btn {
+  padding: 13px 28px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(26, 26, 46, 0.16);
+}
+
+.start-shopping-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(26, 26, 46, 0.24);
+}
+
+/* ── Orders List & Cards ──────────────────────────────────── */
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  box-shadow: 
+    0 8px 28px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.order-id-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 4px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.order-date {
+  font-size: 13.5px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.order-card-divider {
+  border: none;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.06);
+  margin: 18px 0;
+}
+
+/* ── Order Card Items ─────────────────────────────────────── */
+
+.order-card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-card-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #374151;
+}
+
+.item-name-qty {
+  font-weight: 500;
+}
+
+.item-price {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* ── Order Card Footer ────────────────────────────────────── */
+
+.order-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-total-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-total-block .total-label {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.order-total-block .total-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.view-details-btn {
+  padding: 9px 20px;
+  background-color: #f3f4f6;
+  color: #1a1a2e;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #1a1a2e;
+  color: #ffffff;
+  border-color: #1a1a2e;
+}
+
+/* ── Status Pills ─────────────────────────────────────────── */
+
+.status-pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-placed,
+.status-paid,
+.status-confirmed {
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.status-pending,
+.status-pending_payment {
+  background-color: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
