@@ -73,11 +73,16 @@ async function login(req, res) {
 
     const jwtToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' })
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     return res.cookie("jwtToken", jwtToken, {
         httpOnly: true,
         secure: false,
         sameSite: "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         path: "/",
+        maxAge: 60 * 60 * 1000,
     }).status(200).json({
         "success": true,
         "message": "Login successful",
@@ -97,10 +102,14 @@ async function profile(req, res) {
 }
 
 async function logout(req, res) {
+    const isProduction = process.env.NODE_ENV === "production";
+
     return res.clearCookie("jwtToken", {
         httpOnly: true,
         secure: false,
         sameSite: "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         path: "/",
     })
         .status(200)

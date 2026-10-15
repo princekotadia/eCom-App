@@ -10,8 +10,31 @@ import cors from "cors";
 import cartRoutes from "./routes/cart.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 
+app.set("trust proxy", 1);
+
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    process.env.CLIENT_URL,
+].filter(Boolean).map(url => url.replace(/\/$/, ""));
+
 app.use(cors({
     origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+        // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
+        if (!origin) return callback(null, true);
+
+        const normalizedOrigin = origin.replace(/\/$/, "");
+        if (
+            allowedOrigins.includes(normalizedOrigin) ||
+            normalizedOrigin.endsWith(".vercel.app")
+        ) {
+            return callback(null, true);
+        }
+
+        return callback(new Error(`CORS error: origin ${origin} is not allowed`));
+    },
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
@@ -32,6 +55,14 @@ app.use('/wishlist', wishRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
 app.use("/", productRoutes);
+
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+app.get("/", (req, res) => {
+    res.status(200).json({ status: "ok", message: "E-Commerce API is running" });
+});
 
 
 const PORT = process.env.PORT || 5000;
