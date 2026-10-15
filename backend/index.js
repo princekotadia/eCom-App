@@ -20,7 +20,6 @@ const allowedOrigins = [
 ].filter(Boolean).map(url => url.replace(/\/$/, ""));
 
 app.use(cors({
-    origin: "http://localhost:5173",
     origin: function (origin, callback) {
         // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
         if (!origin) return callback(null, true);

@@ -3,7 +3,6 @@ import userModel from "../models/customer.model.js";
 
 async function validateToken(req, res, next) {
     try {
-        const token = req.cookies?.jwtToken
         const token = req.cookies?.jwtToken || req.headers.authorization?.replace(/^Bearer\s+/i, "");
 
         if (!token) {
